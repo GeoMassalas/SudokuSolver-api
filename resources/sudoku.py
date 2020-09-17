@@ -9,9 +9,11 @@ class Sudoku:
 
     def str_to_grid(self, str_pzl):
         """ Converting a string of 81 characters to a grid """
-        if (type(str_pzl) == str) & (len(str_pzl) == 81):
+        if (type(str_pzl) == str) & (len(str_pzl) == 81) & str_pzl.isdigit():
             for i in range(0, 81):
                 self.grid[int(i / 9)][int(i % 9)] = int(str_pzl[i])
+        else:
+            print("Invalid String!")
 
     def grid_to_str(self):
         """ Converting the grid to a 81 character string """
@@ -110,3 +112,29 @@ class Sudoku:
     def get_max_display_solutions(self):
         """ Get the maximum amount of solutions to be displayed """
         return self.max_display_solutions
+    
+    def is_valid(self):
+        """ Checks if the sudoku is valid """
+        a = set()
+        for i in range(0, 9):
+            for j in range(0, 9):
+                if self.grid[i][j] != 0:
+                    rows = str(self.grid[i][j]) + " in row " + str(i) 
+                    cols = str(self.grid[i][j]) + " in column " + str(j) 
+                    sqrs = str(self.grid[i][j]) + " in square " + str(i//3) + " - " + str(j//3)
+                    if (rows in a) | (rows in a) | (sqrs in a):
+                        return False
+                    else:
+                        a.add(rows)
+                        a.add(cols)
+                        a.add(sqrs)
+        return True
+    
+    def clues(self):
+        """ Returns the number of non-zero digits """
+        count = 0
+        for i in range(0,9):
+            for j in range(0,9):
+                if self.grid[i][j] != 0:
+                    count += 1
+        return count

@@ -1,5 +1,6 @@
 from django.urls import path
-from .views import solve
+from .views import solve, serve
 urlpatterns = [
-    path('', solve, name="Solve Sudoku"),
+    path('api/solve', solve, name="Solve Sudoku"),
+    path('api/serve', serve, name="Serve Sudoku"),
     ]
