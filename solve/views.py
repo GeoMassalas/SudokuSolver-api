@@ -29,7 +29,7 @@ def solve(request, pk=None):
     return Response(msg, status=sts)
 
 
-@api_view(['GET'])
+@api_view(['POST'])
 def serve(request, pk=None):
     if 'difficulty' in request.data:
         dif = int(request.data['difficulty'])
@@ -46,6 +46,9 @@ def serve(request, pk=None):
         else:
             msg = {'message': 'You should provide a difficulty of 1 to 9.'}
             sts = status.HTTP_400_BAD_REQUEST
+    else:
+        msg = {'message': 'You should provide a difficulty of 1 to 9.'}
+        sts = status.HTTP_400_BAD_REQUEST
     return Response(msg, status=sts)
 
 
